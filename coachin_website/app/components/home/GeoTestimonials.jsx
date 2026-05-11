@@ -133,7 +133,7 @@ const GeoTestimonials = () => {
           const cardId = topper._id || index;
           
           return (
-            <div key={cardId} onClick={() => setActiveCard(activeCard === cardId ? null : cardId)} className={`group relative cursor-pointer bg-base-100 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-72 border border-base-200 flex flex-col ${isLocal ? 'ring-2 ring-primary ring-offset-2' : ''}`}>
+            <div key={cardId} onClick={() => setActiveCard(activeCard === cardId ? null : cardId)} className={`group relative cursor-pointer bg-base-content rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-72 border border-base-200 flex flex-col ${isLocal ? 'ring-2 ring-primary ring-offset-2' : ''}`}>
               
               {/* Background Image & Default State */}
               <div className="absolute inset-0 w-full h-full">
@@ -176,9 +176,9 @@ const GeoTestimonials = () => {
               </div>
 
               {/* Hover Overlay Details */}
-              <div className={`absolute inset-0 bg-base-100/98 backdrop-blur-md p-6 flex flex-col transition-transform duration-300 z-20 overflow-y-auto custom-scrollbar ${activeCard === cardId ? 'translate-y-0' : 'translate-y-full group-hover:translate-y-0'}`}>
+              <div className={`absolute inset-0 bg-base-content/98 backdrop-blur-md p-6 flex flex-col transition-transform duration-300 z-20 overflow-y-auto custom-scrollbar ${activeCard === cardId ? 'translate-y-0' : 'translate-y-full group-hover:translate-y-0'}`}>
                 <div className="flex justify-between items-start gap-2">
-                  <h3 className="text-lg font-bold text-base-100 leading-tight">{topper.name}</h3>
+                  <h3 className="text-lg font-bold text-base-content leading-tight">{topper.name}</h3>
                   <button 
                     className="btn btn-xs btn-circle btn-ghost lg:hidden shrink-0"
                     onClick={(e) => {
@@ -199,7 +199,7 @@ const GeoTestimonials = () => {
                    ))}
                 </div>
 
-                <p className="text-sm text-base-100/80 italic mb-4 flex-grow line-clamp-4">"{topper.message || topper.quote}"</p>
+                <p className="text-sm text-base-content/80 italic mb-4 flex-grow line-clamp-4">"{topper.message || topper.quote}"</p>
 
                 {topper.videoId ? (
                    <a href={`https://www.youtube.com/watch?v=${topper.videoId}`} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="btn border-none bg-red-600 text-white hover:bg-red-700 w-full mt-auto shadow-sm flex items-center justify-center gap-2 min-h-[48px]">
@@ -207,7 +207,7 @@ const GeoTestimonials = () => {
                      Watch Testimonial
                    </a>
                 ) : (
-                  <div className="text-xs text-base-100/70 font-medium mt-auto flex items-center justify-center gap-1.5 bg-base-200/50 p-2.5 rounded-lg border border-base-200 min-h-[48px]">
+                  <div className="text-xs text-base-content/70 font-medium mt-auto flex items-center justify-center gap-1.5 bg-base-200/50 p-2.5 rounded-lg border border-base-content min-h-[48px] border-dashed">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-primary shrink-0"><path fillRule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clipRule="evenodd" /></svg>
                     <span className="truncate">{topper.center || "Eunoia Education Raipur"}</span>
                   </div>

@@ -68,7 +68,7 @@ const UdemyCourseCard = () => {
               
               {/* Content Section */}
               <div className="card-body p-5 flex flex-col flex-grow bg-brand-gradient rounded-b-[inherit]">
-                <h3 className="card-title text-base-100 text-[16px] md:text-[17px] font-extrabold leading-snug line-clamp-2">
+                <h3 className="card-title text-base-content text-[16px] md:text-[17px] font-extrabold leading-snug line-clamp-2">
                   {course.courseName || course.title}
                 </h3>
                 
@@ -101,7 +101,7 @@ const UdemyCourseCard = () => {
                     ✕
                   </button>
                 </div>
-                <div className="text-sm text-base-content/80 font-medium leading-relaxed whitespace-pre-wrap flex-grow overflow-scroll "> 
+                <div className="text-sm text-base-100/80 font-medium leading-relaxed whitespace-pre-wrap flex-grow overflow-scroll "> 
                   {course.description || "Master the concepts with this comprehensive course. Enroll to elevate your skills."}
                 </div>
                 <div className="mt-6 shrink-0 w-full">

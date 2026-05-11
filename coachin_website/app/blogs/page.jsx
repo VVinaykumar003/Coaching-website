@@ -45,26 +45,26 @@ const Blog = () => {
       onClick={() => router.push(`/blogs/${post._id || post.id}`)}
       className="card bg-base-100 w-full shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-base-200 group flex flex-col cursor-pointer overflow-hidden"
     >
-      <figure className="h-52 w-full relative overflow-hidden">
+      <figure className="h-48 w-full relative overflow-hidden ">
         <img src={post.coverImage || "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=600&auto=format&fit=crop"} alt={post.title} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" 
          loading='lazy'
         />
         {post.badge && (
-          <div className={`absolute top-4 right-4 badge ${post.badgeColor} shadow-sm font-semibold`}>{post.badge}</div>
+          <div className={`absolute top-4 right-4 badge badge-success ${post.badgeColor} shadow-sm font-semibold`}>{post.badge}</div>
         )}
       </figure>
       
-      <div className="card-body p-6 flex flex-col flex-grow">
+      <div className="card-body p-5 flex flex-col grow bg-base-content">
         <div className="flex justify-between items-center mb-2">
           <span className="text-xs font-bold text-primary uppercase tracking-wider">{post.category || 'Article'}</span>
           <span className="text-xs text-base-100/50 font-medium">{new Date(post.createdAt || Date.now()).toLocaleDateString()}</span>
         </div>
-        <h2 className="card-title text-xl font-bold leading-snug mb-3 group-hover:text-primary transition-colors">{post.title}</h2>
-        <p className="text-base-100/70 line-clamp-3 leading-relaxed mb-4 flex-grow">
+        <h2 className="card-title text-lg font-bold leading-snug mb-2 group-hover:text-primary transition-colors line-clamp-2">{post.title}</h2>
+        <p className="text-sm text-base-100/70 line-clamp-2 leading-relaxed mb-4 grow">
           {post.content || "Read the full post to discover more insights and tips for your exam preparation."}
         </p>
         <div className="card-actions mt-auto w-full pt-2">
-          <button className="btn btn-primary w-full shadow-sm hover:shadow-md transition-all">Read More</button>
+          <button className="btn btn-sm btn-primary w-full shadow-sm hover:shadow-md transition-all">Read More</button>
         </div>
       </div>
     </div>
@@ -97,7 +97,7 @@ const Blog = () => {
         {!loading && (
           <>
             {/* Blog Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 text-left mb-8">
               {filteredPosts.map(renderCard)}
             </div>
 
@@ -108,10 +108,10 @@ const Blog = () => {
                   <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" className="w-full h-full object-cover"><defs><pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M0 40L40 0H20L0 20M40 40V20L20 40" fill="currentColor" fillOpacity="1" /></pattern></defs><rect width="100%" height="100%" fill="url(#p)" /></svg>
                 </div>
                 <div className="relative z-10 w-full max-w-2xl">
-                  <h3 className="text-3xl md:text-4xl font-extrabold mb-4 text-base-100">Get Exam Tips in your Inbox</h3>
+                  <h3 className="text-3xl md:text-4xl font-extrabold mb-4 text-base-content">Get Exam Tips in your Inbox</h3>
                   <p className="text-primary-content/90 mb-8 text-lg">Join 10,000+ students receiving weekly study hacks, formula sheets, and strategy breakdowns.</p>
                   <form className="join w-full justify-center shadow-xl rounded-full" onSubmit={(e) => e.preventDefault()}>
-                    <input type="email" placeholder="Enter your email address..." className="input input-bordered join-item w-full max-w-sm text-base-100 border-none focus:outline-none focus:ring-2 focus:ring-base-100" required />
+                    <input type="email" placeholder="Enter your email address..." className="input input-bordered join-item w-full max-w-sm text-base-100 border-none focus:outline-none focus:ring-2 focus:ring-base-100 bg-white" required />
                     <button className="btn btn-neutral join-item border-none">Subscribe</button>
                   </form>
                 </div>

@@ -55,7 +55,7 @@ const NewCardSection = () => {
               const courseId = course._id || course.id;
 
               return (
-                <div key={courseId} onClick={() => setActiveCard(activeCard === courseId ? null : courseId)} className="w-[280px] flex flex-col bg-base-100 rounded-md shadow-sm hover:shadow-md transition-shadow duration-300 font-sans cursor-pointer group relative">
+                <div key={courseId} onClick={() => setActiveCard(activeCard === courseId ? null : courseId)} className="w-[280px] flex flex-col bg-base-content rounded-md shadow-sm hover:shadow-md transition-shadow duration-300 font-sans cursor-pointer group relative">
                   
                   {/* Image: Top-aligned, 16:9 aspect ratio */}
                   <div className="w-full aspect-video border border-base-200 rounded-t-md overflow-hidden bg-base-200/50">
@@ -70,12 +70,12 @@ const NewCardSection = () => {
                   {/* Content Section */}
                   <div className="p-3 flex flex-col flex-grow">
                     {/* Title */}
-                    <h3 className="font-bold text-base-content text-[15px] leading-tight line-clamp-2">
+                    <h3 className="font-bold text-base-100 text-[15px] leading-tight line-clamp-2">
                       {course.courseName || course.title}
                     </h3>
                     
                     {/* Instructor */}
-                    <p className="text-xs text-base-content/70 mt-1.5 truncate">
+                    <p className="text-xs text-base-100/70 mt-1.5 truncate">
                       {course.instructor || "Kunal Sir"}
                     </p>
                     
@@ -87,12 +87,12 @@ const NewCardSection = () => {
                         {hasHalfStar && <StarHalf className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />}
                         {[...Array(emptyStars)].map((_, i) => <Star key={`empty-${i}`} className="w-3.5 h-3.5 text-amber-500" />)}
                       </div>
-                      <span className="text-xs text-base-content/60">({course.reviews || "321,456"})</span>
+                      <span className="text-xs text-base-100/60">({course.reviews || "321,456"})</span>
                     </div>
                     
                     {/* Price & Action */}
                     <div className="mt-auto pt-3 flex items-center justify-between">
-                      <div className="font-extrabold text-base-content text-lg">
+                      <div className="font-extrabold text-base-100 text-lg">
                         {course.price || "₹4,999"}
                       </div>
                       <a 
