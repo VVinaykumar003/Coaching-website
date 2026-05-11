@@ -1,26 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+
 @import "tailwindcss";
+@plugin "daisyui";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+@plugin "daisyui/theme" {
+  name: "mytheme";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* 🌿 Softer background (not pure white) */
+  --color-base-100: #F3F6FB; /* main background (soft blue tint) */
+  --color-base-200: #EAF0F8; /* section background */
+  --color-base-300: #989a9b ; /* borders / dividers */
+  --color-base-content: #1A237E; /* deep navy text */
+
+  /* 🎯 Brand colors (refined) */
+    --color-primary: #1A237E; /* deeper than before (more premium) */
+  --color-primary-content: #FFFFFF;
+
+  --color-secondary: #00BCD4;
+  --color-secondary-content: #F9FAFB;
+
+  --color-accent: #26C6DA; /* slightly softer cyan */
+  --color-accent-content: #0F172A;
+
+  --color-neutral: #0F172A; /* richer dark for footer */
+  --color-neutral-content: #E2E8F0;
+
+  /* Feedback colors (keep good contrast) */
+  --color-info: oklch(70% 0.2 220);
+  --color-success: oklch(65% 0.25 140);
+  --color-warning: oklch(80% 0.25 80);
+  --color-error: oklch(65% 0.3 30);
+
+  /* Radius */
+  --radius-selector: 1rem;
+  --radius-field: 0.3rem;
+  --radius-box: 0.75rem;
+
+  /* Effects */
+  --depth: 1;
+  --noise: 0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #334155; /* Slate Grey for readability */
+    line-height: 1.6;
+    background-color: #F8FAFC; /* Soft background to reduce strain */
+  }
+  h1, h2, h3, h4, h5, h6 {
+    
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  h1, h2, h3 {
+    color: #1A237E; /* Brand Navy */
+    letter-spacing: -0.02em;
+  }
+  h1, h2 {
+    font-weight: 700; /* Bold */
+    line-height: 1.2;
+  }
+  h3 {
+    font-weight: 500; /* Medium */
+    line-height: 1.3;
+  }
+  p {
+    font-weight: 400; /* Regular */
+    line-height: 1.6;
+    letter-spacing: 0.01em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Gradients: Using the logo's deep navy to bright cyan transition */
+  .bg-brand-gradient {
+     background: linear-gradient(135deg, #1A237E 0%, #091f3b 100%);
+    color: #FFFFFF;
+    background-size: 200% auto;
+    transition: background-position 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease; 
+  }
+  
+  .bg-brand-gradient:hover {
+    background-position: right center;
+  }
+
+  .text-brand-gradient {
+    background: linear-gradient(135deg, #1A237E 0%, #00BCD4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Anti-Flat Depth (Elevation): Shadows based on Deep Navy */
+  /* Level 1: Subtle border-bottom for section headers */
+  .shadow-level-1 {
+    box-shadow: 0 2px 4px -2px rgba(26, 35, 126, 0.05);
+    border-bottom: 1px solid rgba(26, 35, 126, 0.08);
+  }
+  
+  /* Level 2: Soft, blurred shadow for cards */
+  .shadow-level-2 {
+    box-shadow: 0 10px 30px -5px rgba(26, 35, 126, 0.08), 0 4px 10px -3px rgba(26, 35, 126, 0.04);
+    border: 1px solid #989a9b ;
+  }
+  
+  /* Level 3: Floating elevation shadow for sticky nav */
+  .shadow-level-3 {
+    box-shadow: 0 20px 40px -10px rgba(26, 35, 126, 0.12), 0 8px 16px -4px rgba(26, 35, 126, 0.08);
+  }
+
+  /* Legacy fallbacks for components that haven't migrated to new shadow levels yet */
+  .shadow-elevation-soft { box-shadow: 0 10px 30px -5px rgba(26, 35, 126, 0.08); }
+  .shadow-elevation-medium {
+    box-shadow: 0 10px 30px rgba(26, 35, 126, 0.08), 0 4px 8px rgba(26, 35, 126, 0.04);
+  }
+  
+  .shadow-elevation-strong {
+    box-shadow: 0 20px 40px rgba(26, 35, 126, 0.12), 0 8px 16px rgba(26, 35, 126, 0.06);
+  }
+
+  /* Glassmorphism for Dashboard Containers */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid #989a9b ;
+    box-shadow: 0 8px 32px rgba(26, 35, 126, 0.05);
+  }
+
+  /* Action Button Glow */
+  .shadow-brand-glow {
+    box-shadow: 0 0 12px 0 rgba(0, 188, 212, 0.3); /* Cyan glow */
+  }
+
+  /* Layered shadow for cards */
+  .shadow-layered-card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  }
+
+  /* Navigation Underline Animation */
+  .nav-link-custom {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  .nav-link-custom:hover {
+    color: #00BCD4;
+  }
+  .nav-link-custom::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0px;
+    left: 0;
+    background-color: #00BCD4;
+    transition: width 0.3s ease;
+  }
+  .nav-link-custom:hover::after {
+    width: 100%;
+  }
+
+  /* Readability Utilities */
+  .text-readable {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    max-width: 70ch;
+  }
+
+  .text-deep-navy {
+    color: #1E1B4B;
+  }
+
+ 
 }
