@@ -137,7 +137,7 @@ const GeoTestimonials = () => {
               
               {/* Background Image & Default State */}
               <div className="absolute inset-0 w-full h-full">
-                <Image
+                <img
                   src={topper.videoId ? `https://img.youtube.com/vi/${topper.videoId}/hqdefault.jpg` : (topper.image || "/images/real-classroom-kunal.jpg")} 
                   alt={topper.name} 
                   fill

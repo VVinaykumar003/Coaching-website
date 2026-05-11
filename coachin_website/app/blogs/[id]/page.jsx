@@ -44,7 +44,7 @@ const BlogPage = () => {
             <article className="lg:w-2/3">
               <button 
                 className="btn btn-sm btn-ghost mb-6 pl-0 hover:bg-transparent hover:underline text-base-content/70"
-                onClick={() => router.push('/blog')}
+                onClick={() => router.push('/blogs')}
               >
                 &larr; Back to all posts
               </button>
@@ -55,30 +55,30 @@ const BlogPage = () => {
                  loading='lazy'
               />
               <div className="flex gap-3 items-center mb-6">
-                <span className="badge badge-primary px-3 py-3 text-xs uppercase tracking-wider font-semibold text-white">
+                <span className="badge badge-primary px-3 py-3 text-xs uppercase tracking-wider font-semibold  text-white">
                   {selectedFeaturedPost.category || 'Article'}
                 </span>
-                <span className="text-base-content/60 font-medium">
+                <span className=" text-base-100 font-medium">
                   {new Date(selectedFeaturedPost.createdAt || Date.now()).toLocaleDateString()}
                 </span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-base-content leading-tight mb-8">
+              <h2 className="text-4xl md:text-5xl font-extrabold  text-base-100 leading-tight mb-8">
                 {selectedFeaturedPost.title}
               </h2>
-              <div className="prose max-w-none text-base-content/80 whitespace-pre-wrap leading-relaxed text-lg">
+              <div className="prose max-w-none  text-base-100 whitespace-pre-wrap leading-relaxed text-lg">
                 {selectedFeaturedPost.content || "No content available."}
               </div>
             </article>
 
             {/* Sidebar with other posts */}
             <aside className="lg:w-1/3 flex flex-col gap-6">
-              <h3 className="text-2xl font-bold text-base-content border-b border-base-200 pb-4 mb-2">Read More</h3>
+              <h3 className="text-2xl font-bold text-base-100 border-b border-base-200 pb-4 mb-2">Read More</h3>
               <div className="flex flex-col gap-4 custom-scrollbar overflow-y-auto max-h-[800px] pr-2">
                 {blogPosts.filter(p => (p._id || p.id) !== (selectedFeaturedPost._id || selectedFeaturedPost.id)).map(post => (
                   <div 
                     key={post._id || post.id} 
-                    className="card bg-base-100 shadow-sm hover:shadow-md transition-all cursor-pointer flex-row overflow-hidden h-28 border border-base-200" 
-                    onClick={() => router.push(`/blog/${post._id || post.id}`)}
+                    className="card bg-base-content shadow-sm hover:shadow-md transition-all cursor-pointer flex-row overflow-hidden h-28 border border-base-200" 
+                    onClick={() => router.push(`/blogs/${post._id || post.id}`)}
                   >
                     <img 
                       src={post.coverImage || "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=600&auto=format&fit=crop"} 
@@ -99,7 +99,7 @@ const BlogPage = () => {
           <div className="py-16 text-center">
             <h2 className="text-3xl font-bold mb-4">Post Not Found</h2>
             <p className="text-base-content/60 mb-8">The blog post you're looking for doesn't exist or has been removed.</p>
-            <button className="btn btn-primary" onClick={() => router.push('/blog')}>Go Back to Blog</button>
+            <button className="btn btn-primary" onClick={() => router.push('/blogs')}>Go Back to Blog</button>
           </div>
         ) : null}
       </div>
