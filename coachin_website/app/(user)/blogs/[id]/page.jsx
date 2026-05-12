@@ -58,26 +58,26 @@ const BlogPage = () => {
                 <span className="badge badge-primary px-3 py-3 text-xs uppercase tracking-wider font-semibold  text-white">
                   {selectedFeaturedPost.category || 'Article'}
                 </span>
-                <span className=" text-base-100 font-medium">
+                <span className=" text-base-content font-medium">
                   {new Date(selectedFeaturedPost.createdAt || Date.now()).toLocaleDateString()}
                 </span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-extrabold  text-base-100 leading-tight mb-8">
+              <h2 className="text-4xl md:text-5xl font-extrabold  text-base-content leading-tight mb-8">
                 {selectedFeaturedPost.title}
               </h2>
-              <div className="prose max-w-none  text-base-100 whitespace-pre-wrap leading-relaxed text-lg">
+              <div className="prose max-w-none  text-base-content whitespace-pre-wrap leading-relaxed text-lg">
                 {selectedFeaturedPost.content || "No content available."}
               </div>
             </article>
 
             {/* Sidebar with other posts */}
             <aside className="lg:w-1/3 flex flex-col gap-6">
-              <h3 className="text-2xl font-bold text-base-100 border-b border-base-200 pb-4 mb-2">Read More</h3>
+              <h3 className="text-2xl font-bold text-base-content border-b border-base-200 pb-4 mb-2">Read More</h3>
               <div className="flex flex-col gap-4 custom-scrollbar overflow-y-auto max-h-[800px] pr-2">
                 {blogPosts.filter(p => (p._id || p.id) !== (selectedFeaturedPost._id || selectedFeaturedPost.id)).map(post => (
                   <div 
                     key={post._id || post.id} 
-                    className="card bg-base-content shadow-sm hover:shadow-md transition-all cursor-pointer flex-row overflow-hidden h-28 border border-base-200" 
+                    className="card bg-base-100 shadow-sm hover:shadow-md transition-all cursor-pointer flex-row overflow-hidden h-28 border border-base-200" 
                     onClick={() => router.push(`/blogs/${post._id || post.id}`)}
                   >
                     <img 

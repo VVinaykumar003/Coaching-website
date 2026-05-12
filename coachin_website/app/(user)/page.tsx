@@ -1,10 +1,10 @@
-import Hero from "@/app/components/home/Hero";
-import NewCardSection from "@/app/components/home/NewCardSection";
-import YoutubePromo from "@/app/components/home/YoutubePromo";
-import BatchEnrollment from "@/app/components/home/BatchEnrollment";
-import Cards from "@/app/components/home/Cards";
-import LeadMagnet from "@/app/components/home/LeadMagnet";
-import GeoTestimonials from "@/app/components/home/GeoTestimonials";
+import Hero from "@/app/(user)/components/home/Hero";
+import NewCardSection from "@/app/(user)/components/home/NewCardSection";
+import YoutubePromo from "@/app/(user)/components/home/YoutubePromo";
+import BatchEnrollment from "@/app/(user)/components/home/BatchEnrollment";
+import Cards from "@/app/(user)/components/home/Cards";
+import LeadMagnet from "@/app/(user)/components/home/LeadMagnet";
+import GeoTestimonials from "@/app/(user)/components/home/GeoTestimonials";
 
 export default function Home() {
   return (

@@ -12,38 +12,41 @@
   color-scheme: light;
 
   /* 🌿 Softer background (not pure white) */
-  --color-base-100: #F3F6FB; /* main background (soft blue tint) */
-  --color-base-200: #EAF0F8; /* section background */
-  --color-base-300: #989a9b ; /* borders / dividers */
-  --color-base-content: #1A237E; /* deep navy text */
+  --color-base-100:#F3F6FB; /* main background (soft blue tint) */
+  --color-base-200:#EAF0F8; /* section background */
+  --color-base-300:#989a9b ; /* borders / dividers */
+  --color-base-content:#1A237E; /* deep navy text */
 
   /* 🎯 Brand colors (refined) */
-    --color-primary: #1A237E; /* deeper than before (more premium) */
-  --color-primary-content: #FFFFFF;
+    --color-primary:#1A237E; /* deeper than before (more premium) */
+  --color-primary-content:#FFFFFF;
 
-  --color-secondary: #00BCD4;
-  --color-secondary-content: #F9FAFB;
+  --color-secondary:#00BCD4;
+  --color-secondary-content:#F9FAFB;
 
-  --color-accent: #26C6DA; /* slightly softer cyan */
-  --color-accent-content: #0F172A;
+  --color-accent:#26C6DA; /* slightly softer cyan */
+  --color-accent-content:#0F172A;
 
-  --color-neutral: #0F172A; /* richer dark for footer */
-  --color-neutral-content: #E2E8F0;
+  --color-neutral:#0F172A; /* richer dark for footer */
+  --color-neutral-content:#E2E8F0;
 
   /* Feedback colors (keep good contrast) */
-  --color-info: oklch(70% 0.2 220);
-  --color-success: oklch(65% 0.25 140);
-  --color-warning: oklch(80% 0.25 80);
-  --color-error: oklch(65% 0.3 30);
+  --color-info:oklch(70% 0.2 220);
+  --color-success:oklch(65% 0.25 140);
+  --color-warning:oklch(80% 0.25 80);
+  --color-error:oklch(65% 0.3 30);
+  --color-ghost:rgba(255, 255, 255, 0.5); /* for glassmorphism */
+  --color-brand-gradient-start:#1A237E;
+  --color-brand-gradient-end:#00BCD4;
 
   /* Radius */
-  --radius-selector: 1rem;
-  --radius-field: 0.3rem;
-  --radius-box: 0.75rem;
+  --radius-selector:1rem;
+  --radius-field:0.3rem;
+  --radius-box:0.75rem;
 
   /* Effects */
-  --depth: 1;
-  --noise: 0;
+  --depth:1;
+  --noise:0;
 }
 
 @layer base {

@@ -54,13 +54,13 @@ const Blog = () => {
         )}
       </figure>
       
-      <div className="card-body p-5 flex flex-col grow bg-base-content">
+      <div className="card-body p-5 flex flex-col grow bg-base-100">
         <div className="flex justify-between items-center mb-2">
           <span className="text-xs font-bold text-primary uppercase tracking-wider">{post.category || 'Article'}</span>
-          <span className="text-xs text-base-100/50 font-medium">{new Date(post.createdAt || Date.now()).toLocaleDateString()}</span>
+          <span className="text-xs text-base-content/50 font-medium">{new Date(post.createdAt || Date.now()).toLocaleDateString()}</span>
         </div>
         <h2 className="card-title text-lg font-bold leading-snug mb-2 group-hover:text-primary transition-colors line-clamp-2">{post.title}</h2>
-        <p className="text-sm text-base-100/70 line-clamp-2 leading-relaxed mb-4 grow">
+        <p className="text-sm text-base-content/70 line-clamp-2 leading-relaxed mb-4 grow">
           {post.content || "Read the full post to discover more insights and tips for your exam preparation."}
         </p>
         <div className="card-actions mt-auto w-full pt-2">
@@ -75,8 +75,8 @@ const Blog = () => {
       <div className="container mx-auto px-4 max-w-7xl text-center">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-base-100 mb-4 tracking-tight">Our Blog</h1>
-          <p className="text-lg text-base-100/70 max-w-2xl mx-auto leading-relaxed">Fuel your learning journey with our latest study tips, exam updates, and deep-dive conceptual breakdowns.</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-base-content mb-4 tracking-tight">Our Blog</h1>
+          <p className="text-lg text-base-content/70 max-w-2xl mx-auto leading-relaxed">Fuel your learning journey with our latest study tips, exam updates, and deep-dive conceptual breakdowns.</p>
         </div>
 
         {/* Filter / Category Scroll */}
@@ -103,7 +103,7 @@ const Blog = () => {
 
             {/* Newsletter Interstitial */}
             {filteredPosts.length > 0 && (
-              <div className="rounded-3xl p-8 mb-8 text-center shadow-elevation-medium bg-brand-gradient text-base-100 relative overflow-hidden flex flex-col items-center justify-center">
+              <div className="rounded-3xl p-8 mb-8 text-center shadow-elevation-medium bg-brand-gradient text-white relative overflow-hidden flex flex-col items-center justify-center">
                 <div className="absolute inset-0 opacity-10 pointer-events-none">
                   <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" className="w-full h-full object-cover"><defs><pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M0 40L40 0H20L0 20M40 40V20L20 40" fill="currentColor" fillOpacity="1" /></pattern></defs><rect width="100%" height="100%" fill="url(#p)" /></svg>
                 </div>
@@ -111,7 +111,7 @@ const Blog = () => {
                   <h3 className="text-3xl md:text-4xl font-extrabold mb-4 text-base-content">Get Exam Tips in your Inbox</h3>
                   <p className="text-primary-content/90 mb-8 text-lg">Join 10,000+ students receiving weekly study hacks, formula sheets, and strategy breakdowns.</p>
                   <form className="join w-full justify-center shadow-xl rounded-full" onSubmit={(e) => e.preventDefault()}>
-                    <input type="email" placeholder="Enter your email address..." className="input input-bordered join-item w-full max-w-sm text-base-100 border-none focus:outline-none focus:ring-2 focus:ring-base-100 bg-white" required />
+                    <input type="email" placeholder="Enter your email address..." className="input input-bordered join-item w-full max-w-sm text-base-content border-none focus:outline-none focus:ring-2 focus:ring-primary bg-white" required />
                     <button className="btn btn-neutral join-item border-none">Subscribe</button>
                   </form>
                 </div>
@@ -121,7 +121,7 @@ const Blog = () => {
             {/* Empty State Fallback */}
             {filteredPosts.length === 0 && (
               <div className="py-16 text-center">
-                <p className="text-xl text-base-100/60">No posts found for this category yet. Check back soon!</p>
+                <p className="text-xl text-base-content/60">No posts found for this category yet. Check back soon!</p>
               </div>
             )}
           </>

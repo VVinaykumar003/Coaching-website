@@ -1,25 +1,32 @@
-const jwt = require("jsonwebtoken")
+import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
-const authMiddleware = (req,res,next)=>{
-    try {
-        const header = req.headers.authorization;
+export function middleware(req) {
+  const token = req.cookies.get("token")?.value;
 
-        if(!header){
-            res.status(401).json({
-                message:"No token,Please login again."
-            })
-        }
+  const isAdminRoute = req.nextUrl.pathname.startsWith("/admin");
 
-        const token = header.split(" ")[1];
+  if (!isAdminRoute) {
+    return NextResponse.next();
+  }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  if (!token) {
+    return NextResponse.redirect(
+      new URL("/login", req.url)
+    );
+  }
 
-        req.user = decoded;
+  try {
+    jwt.verify(token, process.env.JWT_SECRET);
 
-        next();
-    } catch (error) {
-        return res.status(401).json({ message: "Invalid token" });
-    }
+    return NextResponse.next();
+  } catch (error) {
+    return NextResponse.redirect(
+      new URL("/login", req.url)
+    );
+  }
 }
 
-module.exports = authMiddleware;
+export const config = {
+  matcher: ["/admin/:path*"],
+};
