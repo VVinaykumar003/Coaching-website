@@ -3,11 +3,10 @@ import Courses from "@/app/models/course.model";
 import cloudinary from "@/app/lib/cloudinary";
 import { connectDB } from "@/app/lib/mongodb";
 
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
-    const id = params.id;
     const formData = await req.formData();
 
     const courseName = formData.get("courseName") as string;
@@ -17,25 +16,17 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 
     const thumbnailFile = formData.get("thumbnail") as File | null;
 
-    if (!courseName || !description || !redirectLink) {
+    if (!courseName || !description || !redirectLink || !category) {
       return NextResponse.json(
         {
           success: false,
-          message: "Course Name, Description, and Redirect Link cannot be empty.",
+          message: "All fields are required.",
         },
         { status: 400 }
       );
     }
 
-    const updatedData: any = {
-      courseName,
-      description,
-      redirectLink,
-    };
-
-    if (category) {
-      updatedData.category = category;
-    }
+    let imageUrl = "";
 
     if (thumbnailFile && thumbnailFile.size > 0) {
       const arrayBuffer = await thumbnailFile.arrayBuffer();
@@ -52,23 +43,22 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
         uploadStream.end(buffer);
       });
 
-      updatedData.thumbnail = uploadResponse.secure_url;
+      imageUrl = uploadResponse.secure_url;
     }
 
-    const course = await Courses.findByIdAndUpdate(id, updatedData, {
-      new: true,
-      runValidators: true,
+    const course = await Courses.create({
+      courseName,
+      description,
+      category,
+      redirectLink,
+      thumbnail: imageUrl,
     });
-
-    if (!course) {
-      return NextResponse.json({ success: false, message: "Course not found." }, { status: 404 });
-    }
 
     return NextResponse.json({
       success: true,
-      message: "Course updated successfully.",
+      message: "Course added successfully.",
       course,
-    });
+    }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json(
       { success: false, message: "Something went wrong.", error: error.message },

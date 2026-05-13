@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import Blog from "../../../../models/blog.model";
 import { connectDB } from "../../../../lib/mongodb";
 
-export async function DELETE(request, { params }) {
+export async function DELETE(request : Request , { params }: { params: { id: string } }) {
   try {
     await connectDB();
     

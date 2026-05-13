@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
 import testimonial from "../../../models/testimonial.model";
 import  {connectDB}  from "../../../lib/mongodb";
+import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (request) => {
+export const dynamic = "force-dynamic";
+
+export const GET = async (request: NextRequest) => {
   try {
     await connectDB();
     const testimonials = await testimonial.find();
-    return new Response(JSON.stringify(testimonials), {
-      status: 200,
-      headers: {"Content-Type": "application/json",},
-    });
+    return NextResponse.json(testimonials, { status: 200 });
   } catch (error) {
     console.error(error);
-    return new Response("Internal Server Error", {status: 500});
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
 };

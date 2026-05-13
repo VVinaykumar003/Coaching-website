@@ -2,12 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import Testimonial from "@/app/models/testimonial.model";
 import { connectDB } from "@/app/lib/mongodb";
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
     
     // Extract the dynamic [id] parameter from the URL
-    const id = params.id;
+    const { id } = await params;
 
     // Attempt to find and delete the document in MongoDB
     const deletedTestimonial = await Testimonial.findByIdAndDelete(id);

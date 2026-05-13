@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import Course from "../../../models/course.model";
 import  {connectDB}  from "../../../lib/mongodb";
 
-export const GET = async (request) => {
+export const GET = async ( request : Request) => {
   try {
     await connectDB();
     const courses = await Course.find();

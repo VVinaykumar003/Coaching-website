@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import Blog from "../../../models/blog.model";
 import {connectDB} from "../../../lib/mongodb";
 
-export async function POST(request) {
+export async function POST(request : Request) {
   try {
     await connectDB();
     
