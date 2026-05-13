@@ -1,6 +1,7 @@
 import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
 import StickyContact from "./components/layouts/StickyContact";
+import AIStudyPartner from "./components/layouts/AIStudyPartner";
 
 export default function WebsiteLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,6 +13,7 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
         {children}
       </main>
       <StickyContact />
+      <AIStudyPartner />
 
       <Footer />
 
