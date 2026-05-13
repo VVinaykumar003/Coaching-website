@@ -1,7 +1,7 @@
-const adminModel = require("../models/admin.model")
-const bcrypt = require("bcrypt");
 
-const defaultAdmin = async(req,res)=>{
+import adminModel from "../models/admin.model";
+import bcrypt from "bcryptjs";
+const defaultAdmin = async(req : Request, res : Response)=>{
     try {
 
         const adminId = process.env.ADMINID;

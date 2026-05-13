@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 
-const batchSchmea = new mongoose.Schema({
+const batchSchema = new mongoose.Schema({
     batchName:{
         type:String,
         required:true,
@@ -21,7 +21,6 @@ const batchSchmea = new mongoose.Schema({
 },{timestamps:true});
 
 
-const batch = mongoose.model("batch",batchSchmea);
-
-module.exports = batch;
+export default mongoose.models.batches ||
+  mongoose.model("batches", batchSchema);
 

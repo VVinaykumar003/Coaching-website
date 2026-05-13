@@ -1,7 +1,7 @@
-import Header from "../(user)/components/layouts/Header";
-import Footer from "../(user)/components/layouts/Footer";
+import Header from "./components/layouts/Header";
+import Footer from "./components/layouts/Footer";
 
-export default function WebsiteLayout({ children }) {
+export default function WebsiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-linear-to-br from-indigo-50 via-white to-purple-50">
 
