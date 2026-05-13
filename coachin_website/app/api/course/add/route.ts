@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import Courses from "@/app/models/course.model";
 import cloudinary from "@/app/lib/cloudinary";
-import connectDB from "@/app/lib/mongodb";
+import {connectDB} from "@/app/lib/mongodb";
 
 export async function POST(req: NextRequest) {
   try {
