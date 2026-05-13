@@ -22,7 +22,7 @@ const ManageCourses = () => {
   const [isOtherCategoryAdd, setIsOtherCategoryAdd] = useState(false);
   const [isOtherCategoryEdit, setIsOtherCategoryEdit] = useState(false);
 
-  const showSuccess = (message) => {
+  const showSuccess = (message : any ) => {
     setSuccessMessage(message);
     document.getElementById('success_modal').showModal();
   };
@@ -52,7 +52,11 @@ const ManageCourses = () => {
     }
     
     try {
-      await courseAPI.add(formData);
+      const res = await fetch('/api/course/add', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!res.ok) throw new Error("Failed to add course");
       e.target.reset();
       setIsOtherCategoryAdd(false);
       document.getElementById('add_course_modal').close();
@@ -114,7 +118,11 @@ const ManageCourses = () => {
     }
 
     try {
-      await courseAPI.update(editingCourse._id || editingCourse.id, formData);
+      const res = await fetch(`/api/course/update/${editingCourse._id || editingCourse.id}`, {
+        method: 'PUT',
+        body: formData,
+      });
+      if (!res.ok) throw new Error("Failed to update course");
       setEditingCourse(null);
       document.getElementById('edit_course_modal').close();
       fetchCourses();
