@@ -17,11 +17,15 @@ export async function POST(req : Request ) {
       });
     }
 
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET is not defined in environment variables");
+    }
+
     const token = jwt.sign(
       {
         adminId,
       },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET as string,
       {
         expiresIn: "7d",
       }
@@ -31,7 +35,7 @@ export async function POST(req : Request ) {
       success: true,
       token,
     });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({
       success: false,
       message: error.message,
