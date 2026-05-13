@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import {blogAPI} from '../../api/api';
 
 const ManageBlogs = () => {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState<any[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editingBlog, setEditingBlog] = useState(null);
   const [blogToDelete, setBlogToDelete] = useState(null);

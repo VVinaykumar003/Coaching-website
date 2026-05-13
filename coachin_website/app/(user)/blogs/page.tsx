@@ -6,7 +6,7 @@ import {useRouter} from 'next/navigation';
 
 const Blog = () => {
   const router = useRouter();
-  const [blogPosts, setBlogPosts] = useState([]);
+  const [blogPosts, setBlogPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('All');
 
@@ -39,7 +39,7 @@ const Blog = () => {
     : blogPosts.filter(post => (post.category || 'Article') === activeCategory);
 
   // Reusable card render function
-  const renderCard = (post) => (
+  const renderCard = (post: any) => (
     <div 
       key={post._id || post.id} 
       onClick={() => router.push(`/blogs/${post._id || post.id}`)}

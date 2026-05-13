@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import { testimonialAPI } from '../../api/api';
 
 const ManageTestimonials = () => {
-  const [testimonials, setTestimonials] = useState([]);
+  const [testimonials, setTestimonials] = useState<any[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editingTestimonial, setEditingTestimonial] = useState(null);
   const [testimonialToDelete, setTestimonialToDelete] = useState(null); 

@@ -11,7 +11,7 @@ const STANDARD_CATEGORIES = [
 ];
 
 const ManageCourses = () => {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState<any[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
   const [courseToDelete, setCourseToDelete] = useState(null);
