@@ -3,7 +3,7 @@ import Courses from "@/app/models/course.model";
 import cloudinary from "@/app/lib/cloudinary";
 import { connectDB } from "@/app/lib/mongodb";
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     await connectDB();
 
