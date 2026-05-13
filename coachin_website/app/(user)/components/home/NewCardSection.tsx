@@ -6,9 +6,9 @@ import { Star, StarHalf } from 'lucide-react';
 
 const NewCardSection = () => {
 
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true); 
-  const [activeCard, setActiveCard] = useState(null);
+  const [activeCard, setActiveCard] = useState<string | number | null>(null);
 
   useEffect(() => {
     const fetchCourses = async () => {

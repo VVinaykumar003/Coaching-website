@@ -33,7 +33,7 @@ const batches = [
 ];
 
 const BatchEnrollment = () => {
-  const mapModalRef = useRef(null);
+  const mapModalRef = useRef<HTMLDialogElement>(null);
 
   return (
     <div className="container mx-auto px-4 max-w-7xl py-4 md:py-6 font-sans border-b border-[#E2E8F0]">

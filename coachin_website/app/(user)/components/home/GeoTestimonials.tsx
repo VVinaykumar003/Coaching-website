@@ -56,9 +56,9 @@ const defaultTestimonials = [
 
 const GeoTestimonials = () => {
   const [userCity, setUserCity] = useState('');
-  const [allTestimonials, setAllTestimonials] = useState([]);
+  const [allTestimonials, setAllTestimonials] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeCard, setActiveCard] = useState(null);
+  const [activeCard, setActiveCard] = useState<string | number | null>(null);
 
   useEffect(() => {
     const initData = async () => {

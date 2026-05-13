@@ -5,7 +5,7 @@ import Image from 'next/image';
 // import { courseAPI } from '../../api/api';
 
 const UdemyCourseCard = () => {
-    const [courses, setCourses] = useState([]);
+    const [courses, setCourses] = useState<any[]>([]);
     const [loading, setLoading] = useState(true); 
     const [showAll, setShowAll] = useState(false);
     const [activeCard, setActiveCard] = useState(null);

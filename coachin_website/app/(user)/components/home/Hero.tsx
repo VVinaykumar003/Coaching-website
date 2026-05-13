@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 
 const Hero = () => {
-  const carouselRef = useRef(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   const slides = [
     { desktop: '/banner/banner_1.png', mobile: '/mobile/mobile_1.png' },
