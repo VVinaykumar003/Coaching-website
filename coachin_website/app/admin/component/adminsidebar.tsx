@@ -8,7 +8,7 @@ const AdminSidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const isActive = (path) => {
+  const isActive = (path: string) => {
     // Exact match for dashboard, partial for others to highlight nested routes
     if (path === '/admin') {
       return pathname === path ? "bg-brand-gradient text-white font-bold shadow-sm" : "hover:bg-white text-base-100/80";

@@ -14,7 +14,7 @@ export async function GET() {
       success: true,
       blogs,
     });
-  } catch (error) {
+  } catch (error : any) {
     return NextResponse.json(
       {
         success: false,

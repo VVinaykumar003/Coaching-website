@@ -122,7 +122,7 @@ const Contact = () => {
               title="Center Location"
               className="w-full h-full"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.9189729881666!2d81.65089181534063!3d21.235071185888062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a28ddbb148ce1df%3A0x5e56d47b7b12cb7!2sNew%20Rajendra%20Nagar%2C%20Raipur%2C%20Chhattisgarh%20492001!5e0!3m2!1sen!2sin!4v1689880000000!5m2!1sen!2sin"
-              allowFullScreen=""
+              allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>

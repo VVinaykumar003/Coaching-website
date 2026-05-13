@@ -1,4 +1,5 @@
-const cloudinary = require("cloudinary").v2;
+import { v2 as cloudinary } from "cloudinary";
+
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -6,4 +7,5 @@ cloudinary.config({
   api_secret: process.env.API_SECRET
 });
 
-module.exports = cloudinary;
+export { cloudinary };
+export default cloudinary;

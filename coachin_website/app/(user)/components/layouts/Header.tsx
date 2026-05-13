@@ -9,9 +9,15 @@ const Header = () => {
 
 
   const closeMenu = () => {
-    const toggle = document.getElementById('navbar-1-toggle');
+    const toggle = document.getElementById('navbar-1-toggle') as HTMLInputElement | null;
     if (toggle) toggle.checked = false;
-    document.activeElement.blur();
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+  };
+
+  const blurActiveElement = () => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   };
 
   // const closeDropdown = () => {
@@ -51,10 +57,10 @@ const Header = () => {
     </div>
     <div className="navbar-center hidden lg:flex">
       <ul className="menu menu-horizontal px-4  ">
-        <li><Link href="/" className={navLinkStyle} onClick={() => document.activeElement.blur()}>Home</Link></li>
-        <li><Link href="/about" className={navLinkStyle} onClick={() => document.activeElement.blur()}>About</Link></li>
+        <li><Link href="/" className={navLinkStyle} onClick={blurActiveElement}>Home</Link></li>
+        <li><Link href="/about" className={navLinkStyle} onClick={blurActiveElement}>About</Link></li>
         <li>
-          <Link href="/courses" className={navLinkStyle} onClick={() => document.activeElement.blur()}>Courses</Link>
+          <Link href="/courses" className={navLinkStyle} onClick={blurActiveElement}>Courses</Link>
           {/* <details id="courses-desktop-dropdown">
             <summary className={navLinkStyle}>Courses</summary>
             <ul className="p-2 bg-base-100 shadow-xl rounded-box w-48 z-10 border border-base-200">
@@ -64,9 +70,9 @@ const Header = () => {
             </ul>
           </details> */}
         </li>
-        <li><Link href="/features" className={navLinkStyle} onClick={() => document.activeElement.blur()}>Features</Link></li>
-        <li><Link href="/blogs" className={navLinkStyle} onClick={() => document.activeElement.blur()}>Blog</Link></li>
-        <li><Link href="/contact" className={navLinkStyle} onClick={() => document.activeElement.blur()}>Contact</Link></li>
+        <li><Link href="/features" className={navLinkStyle} onClick={blurActiveElement}>Features</Link></li>
+        <li><Link href="/blogs" className={navLinkStyle} onClick={blurActiveElement}>Blog</Link></li>
+        <li><Link href="/contact" className={navLinkStyle} onClick={blurActiveElement}>Contact</Link></li>
       </ul>
     </div>
     <div className="navbar-end gap-2 pr-2">

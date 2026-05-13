@@ -5,12 +5,20 @@ import React, { useState, useEffect } from 'react';
 const ManageTestimonials = () => {
   const [testimonials, setTestimonials] = useState<any[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [editingTestimonial, setEditingTestimonial] = useState(null);
-  const [testimonialToDelete, setTestimonialToDelete] = useState(null); 
-  const [viewingTestimonial, setViewingTestimonial] = useState(null);
+  const [editingTestimonial, setEditingTestimonial] = useState<any | null>(null);
+  const [testimonialToDelete, setTestimonialToDelete] = useState<string | null>(null); 
+  const [viewingTestimonial, setViewingTestimonial] = useState<any | null>(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  const openModal = (modalId: string) => {
+    (document.getElementById(modalId) as HTMLDialogElement)?.showModal();
+  };
+
+  const closeModal = (modalId: string) => {
+    (document.getElementById(modalId) as HTMLDialogElement)?.close();
+  };
 
   const fetchTestimonials = async () => {
     try {
@@ -25,26 +33,30 @@ const ManageTestimonials = () => {
     fetchTestimonials();
   }, []);
 
-  const showSuccess = (message) => {
+  const showSuccess = (message: string) => {
     setSuccessMessage(message);
-    document.getElementById('success_modal').showModal();
+    openModal('success_modal');
   };
 
-  const handleAddTestimonial = async (e) => {
+  const handleAddTestimonial = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
     setIsSubmitting(true);
     const formData = new FormData(e.currentTarget);
     
     // Prevent sending an empty file if the user didn't select one
     const imageFile = formData.get('image');
-    if (imageFile && imageFile.size === 0) {
+    if (imageFile instanceof File && imageFile.size === 0) {
       formData.delete('image');
     }
     
     try {
-      await testimonialAPI.add(formData);
-      e.target.reset();
-      document.getElementById('add_testimonial_modal').close();
+      const res = await fetch('/api/testimonial/add', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!res.ok) throw new Error("Failed to add testimonial");
+      e.currentTarget.reset();
+      closeModal('add_testimonial_modal');
       fetchTestimonials(); // refresh the list
       showSuccess("Testimonial added successfully!");
     } catch (err) {
@@ -54,32 +66,33 @@ const ManageTestimonials = () => {
     }
   };
 
-  const confirmDelete = (id) => {
+  const confirmDelete = (id: string) => {
     setTestimonialToDelete(id);
-    document.getElementById('delete_confirm_modal').showModal();
+    openModal('delete_confirm_modal');
   };
 
   const executeDelete = async () => {
     if (!testimonialToDelete) return;
     try {
-      await testimonialAPI.delete(testimonialToDelete);
+      const res = await fetch(`/api/testimonial/delete/${testimonialToDelete}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error("Failed to delete testimonial");
       fetchTestimonials();
       setTestimonialToDelete(null);
-      document.getElementById('delete_confirm_modal').close();
+      closeModal('delete_confirm_modal');
       showSuccess("Testimonial deleted successfully!");
     } catch (err) {
       console.error("Failed to delete testimonial:", err);
       setTestimonialToDelete(null);
-      document.getElementById('delete_confirm_modal').close();
+      closeModal('delete_confirm_modal');
     }
   };
 
-  const openEditModal = (testimonial) => {
+  const openEditModal = (testimonial: any) => {
     setEditingTestimonial(testimonial);
-    document.getElementById('edit_testimonial_modal').showModal();
+    openModal('edit_testimonial_modal');
   };
 
-  const handleEditTestimonial = async (e) => {
+  const handleEditTestimonial = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     const formData = new FormData(e.currentTarget);
@@ -90,17 +103,18 @@ const ManageTestimonials = () => {
 
     // If no new image was selected, remove it to avoid overwriting with an empty file
     const imageFile = formData.get('image');
-    if (imageFile && imageFile.size === 0) {
+    if (imageFile instanceof File && imageFile.size === 0) {
       formData.delete('image');
     }
 
     try {
-      await fetch(`/api/testimonial/update/${editingTestimonial._id || editingTestimonial.id}`, {
+      const res = await fetch(`/api/testimonial/update/${editingTestimonial._id || editingTestimonial.id}`, {
         method: 'PUT',
         body: formData,
       });
+      if (!res.ok) throw new Error("Failed to update testimonial");
       setEditingTestimonial(null);
-      document.getElementById('edit_testimonial_modal').close();
+      closeModal('edit_testimonial_modal');
       fetchTestimonials();
       showSuccess("Testimonial updated successfully!");
     } catch (err) {
@@ -133,7 +147,7 @@ const ManageTestimonials = () => {
         </div>
         <button 
           className="btn border-none bg-brand-gradient shadow-brand-glow hover:shadow-lg hover:-translate-y-px transition-all duration-300 w-full sm:w-auto"
-          onClick={() => document.getElementById('add_testimonial_modal').showModal()}
+          onClick={() => openModal('add_testimonial_modal')}
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 mr-1"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
           Add Testimonial
@@ -188,7 +202,7 @@ const ManageTestimonials = () => {
               ))}
               {testimonials.length === 0 && (
                 <tr>
-                  <td colSpan="6" className="text-center py-12 text-base-100/60 font-medium">No testimonials found. Add one to get started!</td>
+                  <td colSpan={6} className="text-center py-12 text-base-100/60 font-medium">No testimonials found. Add one to get started!</td>
                 </tr>
               )}
             </tbody>
@@ -272,7 +286,7 @@ const ManageTestimonials = () => {
                 </div>
 
                 <div className="p-6 border-t border-base-200 bg-base-content flex justify-end gap-2">
-                    <button type="button" className="btn btn-ghost" onClick={() => { isEdit && setEditingTestimonial(null); document.getElementById(modalId).close(); }}>Cancel</button>
+                    <button type="button" className="btn btn-ghost" onClick={() => { isEdit && setEditingTestimonial(null); closeModal(modalId); }}>Cancel</button>
                     <button type="submit" disabled={isSubmitting} className="btn border-none bg-brand-gradient shadow-elevation-soft">
                       {isSubmitting ? <span className="loading loading-spinner"></span> : (isEdit ? "Update Testimonial" : "Save Testimonial")}
                     </button>
@@ -292,7 +306,7 @@ const ManageTestimonials = () => {
           <h3 className="font-bold text-xl text-error">Confirm Deletion</h3>
           <p className="py-4 text-base-100/80">Are you sure you want to delete this testimonial? This action cannot be undone.</p>
           <div className="modal-action">
-            <button type="button" className="btn btn-ghost" onClick={() => { setTestimonialToDelete(null); document.getElementById('delete_confirm_modal').close(); }}>Cancel</button>
+            <button type="button" className="btn btn-ghost" onClick={() => { setTestimonialToDelete(null); closeModal('delete_confirm_modal'); }}>Cancel</button>
             <button type="button" className="btn btn-error text-white" onClick={executeDelete}>
               Yes, Delete
             </button>

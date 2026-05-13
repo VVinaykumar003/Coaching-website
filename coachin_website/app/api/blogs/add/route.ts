@@ -9,11 +9,11 @@ export async function POST(request : Request) {
     
     // 1. Parse FormData instead of JSON
     const formData = await request.formData();
-    const title = formData.get("title");
-    const content = formData.get("content");
-    const category = formData.get("category");
-    const author = formData.get("author") || "Admin"; // Optional fallback
-    const imageFile = formData.get("coverImage");
+    const title = formData.get("title") as string;
+    const content = formData.get("content") as string;
+    const category = formData.get("category") as string;
+    const author = (formData.get("author") as string) || "Admin"; // Optional fallback
+    const imageFile = formData.get("coverImage") as File | null;
 
     // Generate a URL-friendly slug from the title
     const slug = (title || "untitled-post")
@@ -24,7 +24,7 @@ export async function POST(request : Request) {
     let coverImage = "";
 
     // 2. Process the image if it was uploaded
-    if (imageFile && imageFile.size > 0) {
+    if (imageFile instanceof File && imageFile.size > 0) {
       const arrayBuffer = await imageFile.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
       

@@ -1,11 +1,16 @@
-
+import { NextResponse , NextRequest } from "next/server";
 import adminModel from "../models/admin.model";
 import bcrypt from "bcryptjs";
-const defaultAdmin = async(req : Request, res : Response)=>{
+const defaultAdmin = async(req : NextRequest, res : NextResponse )=>{
     try {
 
         const adminId = process.env.ADMINID;
         const password = process.env.PASSWORD;
+
+        if (!adminId || !password) {
+            console.warn("ADMINID or PASSWORD is not defined in environment variables.");
+            return;
+        }
 
         const adminExists = await adminModel.findOne({
             adminId
@@ -17,7 +22,7 @@ const defaultAdmin = async(req : Request, res : Response)=>{
             return;
         }
 
-        const hashedPassword = await bcrypt.hash(password,10);
+        const hashedPassword = await bcrypt.hash(password ,10);
 
         const admin = await adminModel.create({
             adminId:adminId,
@@ -32,4 +37,4 @@ const defaultAdmin = async(req : Request, res : Response)=>{
     }
 }
 
-module.exports = defaultAdmin;
+export default defaultAdmin;

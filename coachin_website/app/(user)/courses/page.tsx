@@ -21,7 +21,7 @@ const CoursesContent = () => {
     setActiveCategory(cat);
   }, [searchParams]);
 
-  const handleCategoryChange = (cat) => {
+  const handleCategoryChange = (cat: string) => {
     setActiveCategory(cat);
     if (cat === 'All') {
       router.push('/courses');

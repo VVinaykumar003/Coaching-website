@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
-export function middleware(req) {
+export function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;
 
   const isAdminRoute = req.nextUrl.pathname.startsWith("/admin");
@@ -17,7 +17,7 @@ export function middleware(req) {
   }
 
   try {
-    jwt.verify(token, process.env.JWT_SECRET);
+    jwt.verify(token, process.env.JWT_SECRET as string);
 
     return NextResponse.next();
   } catch (error) {

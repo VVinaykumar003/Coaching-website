@@ -8,16 +8,16 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useRouter();
   
   // Forgot Password States
   const [newPassword, setNewPassword] = useState('');
   const [updateLoading, setUpdateLoading] = useState(false);
-  const [updateMessage, setUpdateMessage] = useState(null);
-  const [updateError, setUpdateError] = useState(null);
+  const [updateMessage, setUpdateMessage] = useState<string | null>(null);
+  const [updateError, setUpdateError] = useState<string | null>(null);
 
-   const handleSubmit = async (e) => {
+   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -46,17 +46,24 @@ const Login = () => {
     }
   };
 
-  const handleUpdatePassword = async (e) => {
+  const handleUpdatePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setUpdateLoading(true);
     setUpdateError(null);
     setUpdateMessage(null);
 
     try {
-      const response = await adminAPI.updatePassword({ newPassword });
-      setUpdateMessage(response.message || 'Password updated successfully!');
+      const res = await fetch("/api/admin/update-password", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ adminId, newPassword }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Failed to update password.');
+      
+      setUpdateMessage(data.message || 'Password updated successfully!');
       setNewPassword('');
-    } catch (err) {
+    } catch (err: any) {
       setUpdateError(err.message || 'Failed to update password.');
     } finally {
       setUpdateLoading(false);

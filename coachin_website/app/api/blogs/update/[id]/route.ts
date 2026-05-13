@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Blog from "../../../../models/blog.model";
 import { connectDB } from "../../../../lib/mongodb";
 
-export async function PUT(request, { params }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
     
@@ -16,8 +16,8 @@ export async function PUT(request, { params }) {
     const author = formData.get("author");
     const imageFile = formData.get("coverImage");
 
-    const updateData = {};
-    if (title) {
+    const updateData: any = {};
+    if (title && typeof title === "string") {
       updateData.title = title;
       // Generate a new URL-friendly slug if the title is updated
       updateData.slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
@@ -27,7 +27,7 @@ export async function PUT(request, { params }) {
     if (author) updateData.author = author;
 
     // Process the image if a new one was uploaded
-    if (imageFile && imageFile.size > 0) {
+    if (imageFile instanceof File && imageFile.size > 0) {
       const arrayBuffer = await imageFile.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
       const base64Image = buffer.toString('base64');

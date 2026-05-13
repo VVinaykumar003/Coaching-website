@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import courses from "../../../../models/course.model";
 import { connectDB } from "../../../../lib/mongodb";
 
-export async function DELETE(request, { params }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
     

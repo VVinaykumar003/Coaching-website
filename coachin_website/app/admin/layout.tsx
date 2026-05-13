@@ -55,7 +55,7 @@
 import AdminSidebar from "./component/adminsidebar";
 import AdminHeader from "./component/adminheader";
 
-export default function AdminLayout({ children }) {
+export default function AdminLayout({ children  } : { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen bg-base-content overflow-hidden">
 
