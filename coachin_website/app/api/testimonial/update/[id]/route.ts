@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import Testimonial from "@/app/models/testimonial.model";
 import { connectDB } from "@/app/lib/mongodb";
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
     
-    const id = params.id;
+    const { id } = await params;
     const formData = await request.formData();
     
     const name = formData.get("name") as string;
