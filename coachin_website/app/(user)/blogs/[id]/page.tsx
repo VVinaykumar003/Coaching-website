@@ -7,7 +7,7 @@ import { useParams, useRouter } from 'next/navigation';
 const BlogPage = () => {
   const { id } = useParams();
   const router = useRouter();
-  const [blogPosts, setBlogPosts] = useState([]);
+  const [blogPosts, setBlogPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
