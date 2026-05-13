@@ -23,7 +23,7 @@ const Header = () => {
   // const closeDropdown = () => {
   //   const dropdown = document.getElementById('courses-desktop-dropdown');
   //   if (dropdown) dropdown.removeAttribute('open');
-  //   document.activeElement.blur();
+  //   if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
   // };
 
   // Tailwind classes for a sleek animated blue line hover effect
